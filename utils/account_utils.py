@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import *
 
-from utils.api_utils import get_coinbase_client
+from utils.coinbase_api_utils import get_coinbase_client
 
 
 @dataclass

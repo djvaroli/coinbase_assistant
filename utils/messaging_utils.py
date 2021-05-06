@@ -1,0 +1,21 @@
+import os
+from utils.twilio_api_utils import get_twilio_client, TWILIO_PHONE_NUMBER
+
+
+DEFAULT_TO_PHONE_NUMBER = os.environ.get("DEFAULT_TO_PHONE_NUMBER")
+
+
+def send_sms(
+    to: str = DEFAULT_TO_PHONE_NUMBER,
+    body: str = "",
+    from_: str = TWILIO_PHONE_NUMBER
+):
+    client = get_twilio_client()
+
+    message = client.messages.create(
+        body=body,
+        from_=from_,
+        to=DEFAULT_TO_PHONE_NUMBER
+    )
+    
+    return message.sid
