@@ -11,9 +11,8 @@ class ExtendedCoinbaseAccount(object):
         account: Account
     ):
         self.account = account
-
+    
     def __getattr__(self, attr):
-        print(attr)
         return getattr(self.account, attr)
 
     def __repr__(self) -> str:
@@ -24,7 +23,7 @@ class ExtendedCoinbaseAccount(object):
 
     @property
     def is_active(self):
-        account_balance = self.account.balance.amount
+        account_balance = float(self.account.balance.amount)
         return bool(account_balance)
 
     @property
@@ -36,6 +35,19 @@ class ExtendedCoinbaseAccount(object):
         native_balance_currency = self.native_balance.currency
 
         return f"{name} - {balance_amount} {balance_currency} - {native_balance_amount} {native_balance_currency}"
+
+    def net_input(self) -> float:
+        account_transactions = self.account.get_transactions()
+
+        account_net_buy = 0
+        for transaction in account_transactions.data:
+            transaction_type = transaction.type
+            if transaction_type != "buy":
+                continue
+            purchase_amount_usd = float(transaction.native_amount.amount)
+            account_net_buy += purchase_amount_usd
+
+        return account_net_buy
 
     
 def fetch_accounts(
@@ -51,30 +63,3 @@ def fetch_accounts(
             continue
         accounts_to_return.append(account)
     return accounts_to_return
-
-
-def get_account_net_input_amount(
-    account_id: str = None,
-    account: Optional[Account] = None
-):
-    """
-    returns USD amount equalling cumulative amount of money
-    put into account
-    """
-    assert account_id or account, "Must provide either account_id or instance of Account"
-
-    if account_id and not account:
-        client = get_coinbase_client()
-        account_transactions = client.get_transactions(account_id)
-    else:
-        account_transactions = account.get_transactions()
-    
-    account_net_buy = 0
-    for transaction in account_transactions.data:
-        transaction_type = transaction.type
-        if transaction_type != "buy":
-            continue
-        purchase_amount_usd = float(transaction.native_amount.amount)
-        account_net_buy += purchase_amount_usd
-    
-    return account_net_buy

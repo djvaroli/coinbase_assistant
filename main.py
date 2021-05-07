@@ -1,11 +1,13 @@
 import os
 from typing import *
-from utils.account_utils import fetch_accounts, ExtendedCoinbaseAccount
+from utils.portfolio_utils import Portfolio
 from utils.messaging_utils import send_sms
 
 if __name__ == "__main__":
-    accounts: List[ExtendedCoinbaseAccount] = fetch_accounts()
-    account_summaries = "\n".join([a.summary_info for a in accounts])
+    portfolio = Portfolio()
+    portfolio_breakdown = portfolio.breakdown()
+    
+    message = f"Portfolio Net Value: {portfolio_breakdown}"
     send_sms(body=account_summaries)
 
 
