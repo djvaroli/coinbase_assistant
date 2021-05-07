@@ -48,14 +48,14 @@ class Portfolio:
         sms_text = f"Net portfolio value: {net_value: .3f}$\n"
         sms_text += f"Net portfolio input: {net_input: .3f}$\n"
         sms_text += f"Difference: {diff:.3f}$\n\n"
-        sms_text += f"Account info breakdown\n"
+        sms_text += f"Account info breakdown\n\n"
 
         for account_name, account_details in account_blobs.items():
             account_input = account_details['net_input']
             account_value = account_details['net_value']
             sms_text += f"Name: {account_name}\n"
             sms_text += f"Value: {account_value}$\n"
-            sms_text += f"Input: {account_input}$\n"
+            sms_text += f"Input: {account_input}$\n\n"
         
         return sms_text
 
