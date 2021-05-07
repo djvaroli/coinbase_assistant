@@ -8,9 +8,11 @@ To run this for yourself you will need to clone the repo by opening a starting u
 `git clone https://github.com/djvaroli/coinbase_assistant.git coinbase_assistant/ && cd coinbase_assistant`
 
 You can then create a virtual python environment and install all the required dependencies
-`python -m venv venv/`
-`source venv/bin/activate`
-`pip install -r requirements.txt`
+```
+python -m venv venv/
+source venv/bin/activate
+pip install -r requirements.txt
+```
 
 Once that is done you will need to create a `.env` file where you will add your twilio and coinabse API keys. It should look something like this
 ```
