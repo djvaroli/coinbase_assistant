@@ -28,3 +28,8 @@ The phone numbers are set just so that twilio has some default values for sendin
 
 Finally you can simply run `python main.py` and you should get an update with the easy-to-view portfolio summaries.
 
+
+## Future 
+
+Currently, I am planning to add a front-end interface with some added features, intuitive visualizations and most likely some simple machine learning to try and forcast how things will go. I am also planning to Dockerise all of it so that running this locally would be as simple as a couple of docker commands. Stay tuned for the updates!
+
