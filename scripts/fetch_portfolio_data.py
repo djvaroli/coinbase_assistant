@@ -1,5 +1,4 @@
 import os
-import logging
 import simplejson as json
 from datetime import datetime as dt
 from pathlib import Path
@@ -15,7 +14,6 @@ def main():
     date_key = dt.now().strftime("%B-%d-%Y")
     filepath = DATA_DIR / f"{date_key}.json"
 
-    data = []
     if filepath.exists():
         with open(filepath, "r") as f:
             data = json.load(f)
