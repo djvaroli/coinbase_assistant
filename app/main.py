@@ -3,8 +3,8 @@ from typing import *
 
 from fastapi import FastAPI
 
-from app.utils.portfolio_utils import Portfolio
-from app.utils.messaging_utils import send_sms
+from utils.portfolio_utils import Portfolio
+from utils.messaging_utils import send_sms
 
 
 app = FastAPI()
