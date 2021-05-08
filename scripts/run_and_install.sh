@@ -1,2 +1,2 @@
 pip install -r requirements.txt
-cd app/utility_functions && pip install -e .
+pip install -e app/utility_functions/
