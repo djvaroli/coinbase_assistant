@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import uvicorn
 
-from krypt.app.routers import portfolio
+from calypso.app.routers import portfolio
 
 
 app = FastAPI()
