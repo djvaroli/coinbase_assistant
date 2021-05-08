@@ -10,8 +10,19 @@ from app.utils.messaging_utils import send_sms
 app = FastAPI()
 
 
+@app.get("/")
+def home():
+    return "Welcome!"
 
-app.get("/portfolio")
+    
+@app.get("/portfolio")
+def get_portfolio():
+    portfolio = Portfolio()
+    
+    return portfolio.breakdown()
+
+
+
 if __name__ == "__main__":
     portfolio = Portfolio()
     portfolio_breakdown = portfolio.breakdown(format_for_sms=True)

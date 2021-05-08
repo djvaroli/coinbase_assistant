@@ -1,4 +1,4 @@
-from utils import account_utils
+from app.utils import account_utils
 
 
 class Portfolio:

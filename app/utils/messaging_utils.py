@@ -1,6 +1,6 @@
 import os
 from typing import *
-from utils.twilio_api_utils import get_twilio_client, TWILIO_PHONE_NUMBER
+from app.utils.twilio_api_utils import get_twilio_client, TWILIO_PHONE_NUMBER
 
 
 DEFAULT_TO_PHONE_NUMBER = os.environ.get("DEFAULT_TO_PHONE_NUMBER")

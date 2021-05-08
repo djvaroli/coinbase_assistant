@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import *
 
 from coinbase.wallet.model import Account
-from utils.coinbase_api_utils import get_coinbase_client
+from app.utils.coinbase_api_utils import get_coinbase_client
 
 
 class ExtendedCoinbaseAccount(object):
