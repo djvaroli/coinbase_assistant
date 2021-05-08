@@ -1,4 +1,5 @@
 import os
+from typing import *
 from utils.twilio_api_utils import get_twilio_client, TWILIO_PHONE_NUMBER
 
 
@@ -19,3 +20,10 @@ def send_sms(
     )
     
     return message.sid
+
+
+def compute_mean(values: List[Union[int, float]]):
+    sum = 0
+    for value in values:
+        sum += value
+    return sum / len(values)
