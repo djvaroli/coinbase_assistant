@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  calypso:
+    build:
+      context: .
+    image: calypso:$VERSION
+    container_name: calypso
+    ports:
+      - 80:80
+    environment:
+      - COINBASE_API_KEY=$COINBASE_API_KEY
+      - COINBASE_API_SECRET=$COINBASE_API_SECRET
+      - TWILIO_ACCOUNT_SID=$TWILIO_ACCOUNT_SID
+      - TWILIO_AUTH_TOKEN=$TWILIO_AUTH_TOKEN
+      - TWILIO_PHONE_NUMBER=$TWILIO_PHONE_NUMBER
+      - DEFAULT_TO_PHONE_NUMBER=$DEFAULT_TO_PHONE_NUMBER
+    restart: on-failure
