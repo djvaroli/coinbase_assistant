@@ -7,10 +7,12 @@ DEFAULT_TO_PHONE_NUMBER = os.environ.get("DEFAULT_TO_PHONE_NUMBER")
 
 
 def send_sms(
-    to: str = DEFAULT_TO_PHONE_NUMBER,
+    to: str = None,
     body: str = "",
     from_: str = TWILIO_PHONE_NUMBER
 ):
+    if to is None:
+        to = DEFAULT_TO_PHONE_NUMBER
     client = get_twilio_client()
 
     message = client.messages.create(

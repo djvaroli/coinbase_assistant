@@ -14,7 +14,7 @@ app = FastAPI()
 def home():
     return "Welcome!"
 
-    
+
 @app.get("/portfolio")
 def get_portfolio():
     portfolio = Portfolio()
@@ -22,13 +22,13 @@ def get_portfolio():
     return portfolio.breakdown()
 
 
+@app.get("/portfolio/sms_update")
+def send_portfolio_sms_update():
+    portfolio_summary = Portfolio().breakdown(format_for_sms=True)
+    message_id = send_sms(body=portfolio_summary)
+    return message_id
 
-if __name__ == "__main__":
-    portfolio = Portfolio()
-    portfolio_breakdown = portfolio.breakdown(format_for_sms=True)
-
-    send_sms(body=portfolio_breakdown)
-
+    
 
 
 
