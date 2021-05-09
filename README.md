@@ -11,23 +11,49 @@ You can then create a virtual python environment and install all the required de
 ```
 python -m venv venv/
 source venv/bin/activate
-pip install -r requirements.txt
+pip install --upgrade pip
+pip install -e custom/
+pip install -r calypso/requirements.txt
 ```
 
-Once that is done you will need to create a `.env` file where you will add your twilio and coinabse API keys. It should look something like this
+Once that is done you will need to create a `.env` file where you can add your twilio and coinabse API keys. You also need to specify the version for docker-compose, but that can be set to anything. 
+It should look something like this
 ```
 COINBASE_API_KEY=<YOUR_COINBASE_API_KEY>
 COINBASE_API_SECRET=<YOUR_COINBASE_API_SECRET>
 TWILIO_ACCOUNT_SID=<YOUR_TWILIO_ACCOUNT_SID>
 TWILIO_AUTH_TOKEN=<YOUR_TWILIO_AUTH_TOKEN>
 TWILIO_PHONE_NUMBER=<YOUR_TWILIO_PHONE_NUMBER>
-DEFAULT_TO_PHONE_NUMBER=<YOUR_DEFAULT_TO_PHONE_NUMBER> 
+DEFAULT_TO_PHONE_NUMBER=<YOUR_DEFAULT_TO_PHONE_NUMBER>
+VERSION=1.0 
 ```
 
 The phone numbers are set just so that twilio has some default values for sending text messages.
 
-Finally you can simply run `python main.py` and you should get an update with the easy-to-view portfolio summaries.
+## Running with Docker
+If you have Docker installed, to startup the server simply run 
+```
+# from inside the root directory
+docker-compose up
+```
+This will make the backend component of the assistant available at `http://localhost:80`.
 
+
+## Running with uvicorn directly
+If you do not have Docker installed, or you want to run the service in debug mode simply run
+```
+uvicorn calypso.app.main:app --reload
+```
+If you do not want hot-reloading to be enabled simply drop the `--reload` flag.
+
+
+## Setting up crontab job
+
+Currently I have a set up that fetches the portfolio breakdown every 5 minutes. This job is set up using crontab. If you would like to enable that, there is a script that will handle it for you.
+Simply run
+```
+bash scripts/set_up_cron_job.sh
+```
 
 ## Future 
 
