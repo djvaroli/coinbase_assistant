@@ -1,17 +1,25 @@
 import os
+import requests
 import simplejson as json
 from datetime import datetime as dt
 from pathlib import Path
-from utils import portfolio_utils
+
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__name__))
 DATA_DIR = Path(os.path.join(ROOT_DIR, "historical_data"))
 
 
 def main():
-    portfolio = portfolio_utils.Portfolio()
-    new_data = portfolio.breakdown()
+    url = "http://localhost/portfolio/"
+    response = requests.get(url)
+    if response.status_code != 200:
+        raise Exception(f"Request failed with status code {response.status_code}.")
+
+    date = dt.now().isoformat()
     date_key = dt.now().strftime("%B-%d-%Y")
+    new_data = response.json()
+    new_data['date'] = date
+
     filepath = DATA_DIR / f"{date_key}.json"
 
     if filepath.exists():
