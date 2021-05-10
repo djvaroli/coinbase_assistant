@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__name__))
 DATA_DIR = Path(os.path.join(ROOT_DIR, "historical_data"))
-if not DATA_DIR.exists(DATA_DIR):
+if not DATA_DIR.exists():
     DATA_DIR.mkdir()
 
 
